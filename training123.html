@@ -1,52 +1,130 @@
-<!DOCTYPE html>
+
+   <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Driving Eligibility Checker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        input, select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #demo {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
 </head>
+
 <body>
-   <h2>Mini Calculator System</h2>
 
-<p>Enter the number</p>
-<input id = "num1">
-<p>Enter the second number</p>
-<input id ="num2">
-<p>Enter the operator(+,*,-,/)</p>
-<input id = "operator">
+<div class="container">
+    <h2>🚗 Driving Eligibility Checker</h2>
 
-<br><br>
-<button onclick="calculate()">Calculate</button>
-<p id = "result"></p>
+    <input type="number" id="age" placeholder="Enter your age">
 
+    <select id="country">
+        <option value="">Select country</option>
+        <option value="USA">USA</option>
+        <option value="UK">UK</option>
+        <option value="NIGERIA">Nigeria</option>
+    </select>
+
+    <button onclick="checkDriving()">Check</button>
+
+    <p id="demo"></p>
+</div>
 
 <script>
-function calculate(){
-   let num1 = Number(document.getElementById("num1").value);
-   let num2 =  Number(document.getElementById("num2").value); 
-   let operator =  document.getElementById("operator").value;
-   let result;
-   
-if(isNaN(num1 || num2)){
-   result = "Enter a valid number";
+function checkDriving() {
+    let ageInput = document.getElementById("age").value;
+    let country = document.getElementById("country").value;
+    let output = document.getElementById("demo");
 
-}else if(operator == "+"){
-   result = num1 + num2;
-}else if(operator == "-"){
-   result = num1 - num2;
-}else if(operator == "*"){
-   result = num1 * num2;
-}else if(operator == "/"){
-   result = num1 / num2;
-}else {
-   
-   result = "invalid ";
-}
-document.getElementById("result").innerHTML = "Result is :" + result;
+    let rules = {
+        USA: 16,
+        UK: 17,
+        NIGERIA: 18
+    };
+
+    // Reset style
+    output.style.color = "black";
+
+    // Validation
+    if (ageInput === "" || country === "") {
+        output.innerHTML = "⚠️ Please enter age and select a country.";
+        output.style.color = "orange";
+        return;
+    }
+
+    let age = Number(ageInput);
+
+    if (age <= 0) {
+        output.innerHTML = "❌ Please enter a valid age.";
+        output.style.color = "red";
+        return;
+    }
+
+    let minAge = rules[country];
+
+    if (!minAge) {
+        output.innerHTML = "❌ Country not supported.";
+        output.style.color = "red";
+        return;
+    }
+
+    // Logic
+    if (age >= minAge) {
+        output.innerHTML = `✅ At age ${age}, you can drive in ${country}.`;
+        output.style.color = "green";
+    } else {
+        let yearsLeft = minAge - age;
+        output.innerHTML = `❌ You cannot drive in ${country}. Wait ${yearsLeft} more year(s).`;
+        output.style.color = "red";
+    }
 }
 
+// Press Enter to run
+document.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        checkDriving();
+    }
+});
 </script>
-     
+
+</body>
+</html>
 
    
 </body>
