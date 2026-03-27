@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h2>Mini Calculator System</h2>
+
+<p>Enter the number</p>
+<input id = "num1">
+<p>Enter the second number</p>
+<input id ="num2">
+<p>Enter the operator(+,*,-,/)</p>
+<input id = "operator">
+
+<br><br>
+<button onclick="calculate()">Calculate</button>
+<p id = "result"></p>
+
+
+<script>
+function calculate(){
+   let num1 = Number(document.getElementById("num1").value);
+   let num2 =  Number(document.getElementById("num2").value); 
+   let operator =  document.getElementById("operator").value;
+   let result;
+   
+if(isNaN(num1 || num2)){
+   result = "Enter a valid number";
+
+}else if(operator == "+"){
+   result = num1 + num2;
+}else if(operator == "-"){
+   result = num1 - num2;
+}else if(operator == "*"){
+   result = num1 * num2;
+}else if(operator == "/"){
+   result = num1 / num2;
+}else {
+   
+   result = "invalid ";
+}
+document.getElementById("result").innerHTML = "Result is :" + result;
+}
+
+</script>
+     
+
+   
+</body>
+</html>
