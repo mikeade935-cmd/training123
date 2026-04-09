@@ -6,21 +6,37 @@
 <p id="demo"></p>
 
 <script>
-   let text = " ";
+   let correctNum = 7;
+   attempt = 0;
+   let guessNum;
+   
+   let text = "";
+   do{
+     let input = parseInt(prompt("Guess a number between 1 and 10"));
+     guessNum = Number(input);
+    attempt++;
+    if (isNaN(guessNum)){
+        text = "Enter valid number ";
+        continue;
 
-   do {
- let input = prompt("Guess a number between 1 and 10: "); 
-let randomNumber = Math.floor(Math.random() * 10) + 1;
-if (input == randomNumber) {
-  text = "Congratulations! You guessed the number.";
-} else {
-  text = "Sorry, the correct number was " + randomNumber + ". Try again!";
-}
+    }else
+
+    if(guessNum === correctNum){
+        text = "Congratulations! You guessed the number." + " It took you " + attempt + " attempts.";
+        document.getElementById("demo").innerHTML = text ;
+        break;
+    }
+    else{
+        text = "Wrong guess. Try again!" + " Attempt: " + attempt ;
+        
+    }
+    document.getElementById("demo").innerHTML = text ;
+   }
 
 
-   }while(!true);
-document.getElementById("demo").innerHTML = text ;
+   
 
+while(guessNum !== correctNum);
 </script>
  
 ​</body>
