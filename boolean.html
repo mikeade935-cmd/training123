@@ -6,38 +6,46 @@
 <p id="demo"></p>
 
 <script>
-   let correctNum = 7;
-   attempt = 0;
-   let guessNum;
-   
-   let text = "";
-   do{
-     let input = parseInt(prompt("Guess a number between 1 and 10"));
-     guessNum = Number(input);
-    attempt++;
-    if (isNaN(guessNum)){
-        text = "Enter valid number ";
-        continue;
 
-    }else
+let choice;
+let text = "";
 
-    if(guessNum === correctNum){
-        text = "Congratulations! You guessed the number." + " It took you " + attempt + " attempts.";
-        document.getElementById("demo").innerHTML = text ;
-        break;
+do {
+  choice = prompt("Enter your choice:\n1 add\n2 subtract\n3 exit");
+
+  if (choice !== "1" && choice !== "2" && choice !== "3") {
+    text = "❌ Enter a valid option (1, 2, or 3)";
+    
+  } else if (choice === "1") {
+    let a = Number(prompt("Enter first number:"));
+    let b = Number(prompt("Enter second number:"));
+
+    if (isNaN(a) || isNaN(b)) {
+      text = "❌ Invalid numbers entered!";
+    } else {
+      text = "✅ The sum is: " + (a + b);
     }
-    else{
-        text = "Wrong guess. Try again!" + " Attempt: " + attempt ;
-        
+
+  } else if (choice === "2") {
+    let a = Number(prompt("Enter first number:"));
+    let b = Number(prompt("Enter second number:"));
+
+    if (isNaN(a) || isNaN(b)) {
+      text = "❌ Invalid numbers entered!";
+    } else {
+      text = "✅ The difference is: " + (a - b);
     }
-    document.getElementById("demo").innerHTML = text ;
-   }
 
+  } else if (choice === "3") {
+    text = "👋 You chose to exit";
+  }
 
-   
+  document.getElementById("demo").innerHTML = text;
 
-while(guessNum !== correctNum);
+} while (choice !== "3");
+
 </script>
+
  
 ​</body>
 </html>  
